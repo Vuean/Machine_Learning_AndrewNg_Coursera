@@ -1,28 +1,24 @@
-# 第一周
+# 一、Introduction
 
-Welcome to Machine Learning! In this module, we introduce the core idea of teaching a computer to learn concepts using data—without being explicitly programmed. 
-
-We are going to start by covering linear regression with one variable. Linear regression predicts a real-valued output based on an input value. We discuss the application of linear regression to housing price prediction, present the notion of a cost function, and introduce the gradient descent method for learning.
-
-We’ll also have optional lessons that provide a refresher on linear algebra concepts. Basic understanding of linear algebra is necessary for the rest of the course, especially as we begin to cover models with multiple variables. If you feel confident in your understanding of linear algebra, feel free to take a break or help other students out in the forums.
-
-## Introduction
-
-### 1.1 欢迎参加《机器学习》课程
+## 1.1 欢迎参加《机器学习》课程
 
 第一个视频主要讲了什么是机器学习，机器学习能做些什么事情。
 
 机器学习是目前信息技术中最激动人心的方向之一。在这门课中，你将学习到这门技术的前沿，并可以自己实现学习机器学习的算法。
 
-### 1.2 什么是机器学习？
+现实生活中，或许每天躲在使用机器学习。比如，使用谷歌、必应搜索时，使用Facebook或苹果的图片分类程序对照片进行分类时等等。
+
+在这门课中，还将学习到关于机器学习的前沿状况。因为事实上只了解算法、数学并不能解决所关心的实际的问题。所以，本课程还将会花大量的时间做练习，让自己能实现每个这些算法，从而了解内部机理。
+
+## 1.2 什么是机器学习？
 
 Arthur Samuel：定义机器学习为，在进行特定编程的情况下，使计算机**具有学习能力**的领域。
 
-Tom Mitchell：计算机程序从经验E中学习，解决任务T，达到性能度量值P，通过P测定在处理任务T时的性能因经验E而提高。
+Tom Mitchell：计算机程序从**经验E**中学习，解决**任务T**，达到**性能度量值P**，当且仅当，有了经验**E**后，经过**P**评判，程序在处理T时的性能有所提升。
 
-主要的学习算法可分为：**监督学习（Supervised Learning）**和**无监督学习（Unsupervised Learning）**。
+主要的学习算法可分为：**监督学习（Supervised Learning）**和**无监督学习（Unsupervised Learning）**。本课中，我们将花费最多的精力来讨论这两种学习算法。而另一个会花费大量时间的任务是了解应用学习算法的实用建议。
 
-### 1.3 监督学习
+## 1.3 监督学习
 
 监督学习：给学习算法一个由“正确答案”组成的数据集，然后运用学习算法，算出更多的正确答案。用术语来讲，这叫做**回归问题**（regression problem）。我们试着推测出一个**连续值**的结果。还有**分类问题**（classfication problem），试着推出**离散的**输出值。
 
@@ -30,19 +26,57 @@ Tom Mitchell：计算机程序从经验E中学习，解决任务T，达到性能
 
 监督学习的基本思想是，我们数据集中的每个样本都有相应的“正确答案”。再根据这些样本作出预测。其中包括有回归问题，即通过回归来推出一个连续的输出；和分类问题，其目标是推出一组离散的结果。
 
-### 1.4 无监督学习
+## 1.4 无监督学习
 
 无监督学习中的数据可能没有任何标签、或者是相同的标签。针对数据集，无监督学习能将数据分为不同的簇，这也称为**聚类算法**（clustering algorithm）。
 
-## Liner Regression with One Variable
+无监督学习或聚集有着大量的应用。它用于组织大型计算机集群。我有些朋友在大数据中心工作，那里有大型的计算机集群，他们想解决什么样的机器易于协同地工作，如果你能够让那些机器协同工作，你就能让你的数据中心工作得更高效。第二种应用就是社交网络的分析。所以已知你朋友的信息，比如你经常发**email**的，或是你**Facebook**的朋友、**谷歌+**圈子的朋友，我们能否自动地给出朋友的分组呢？即每组里的人们彼此都熟识，认识组里的所有人？还有市场分割。许多公司有大型的数据库，存储消费者信息。所以，你能检索这些顾客数据集，自动地发现市场分类，并自动地把顾客划分到不同的细分市场中，你才能自动并更有效地销售或不同的细分市场一起进行销售。这也是无监督学习，因为我们拥有所有的顾客数据，但我们没有提前知道是什么的细分市场，以及分别有哪些我们数据集中的顾客。我们不知道谁是在一号细分市场，谁在二号市场，等等。那我们就必须让算法从数据中发现这一切。最后，无监督学习也可用于天文数据分析，这些聚类算法给出了令人惊讶、有趣、有用的理论，解释了星系是如何诞生的。这些都是聚类的例子，聚类只是无监督学习中的一种。
 
-### 2.1 模型描述
+# 二、单变量线性回归(Linear Regression with One Variable)
+
+## 2.1 模型描述
 
 上面学习了第一个学习算法——线性回归算法。本小节将看到这个算法的概况，更重要的是将了解监督学习的完整流程。
 
-举例：
+让我们通过一个例子来开始：这个例子是预测住房价格的，我们要使用一个数据集，数据集包含俄勒冈州波特兰市的住房价格。在这里，我要根据不同房屋尺寸所售出的价格，画出我的数据集。比方说，如果你朋友的房子是1250平方尺大小，你要告诉他们这房子能卖多少钱。那么，你可以做的一件事就是构建一个模型，也许是条直线，从这个数据模型上来看，也许你可以告诉你的朋友，他能以大约220000(美元)左右的价格卖掉这个房子。这就是监督学习算法的一个例子。
 
-## Linear Algebra Review
+![图01_房价预测问题（回归问题）]()
+
+它被称作监督学习是因为对于每个数据来说，我们给出了“正确的答案”。即告诉我们：根据我们的数据来说，房子实际的价格是多少，而且，更具体来说，这是一个**回归问题(Regression)**。回归一词指的是，我们根据之前的数据预测出一个准确的输出值。对于这个例子就是价格。
+
+同时，还有另一种最常见的监督学习方式，叫做**分类问题(Classfication)**。当我们想要预测离散的输出值，例如，我们正在寻找癌症肿瘤，并想要确定肿瘤是良性的还是恶性的，这是只有0和1的离散输出。
+
+更进一步来说，在监督学习中我们有一个数据集，这个数据集被称**训练集(training set)**，如下表所示：
+
+![图02_训练集数据]()
+
+我们将要用来描述这个回归问题的标记如下:
+
+- $m$代表训练样本的数量
+
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Linear Algebra Review
 
 线性代数回顾
 
