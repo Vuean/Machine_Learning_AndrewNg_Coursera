@@ -144,17 +144,17 @@ Tom Mitchell：计算机程序从**经验E**中学习，解决**任务T**，达�
 
 梯度下降背后的思想是：开始时我们随机选择一个参数的组合(θ<sub>0</sub>, θ<sub>1</sub>, ..., θ<sub>n</sub>)，计算代价函数，然后我们寻找下一个能让代价函数值下降最多的参数组合。我们持续这么做直到找到一个**局部最小值**（**local minimum**），因为我们并没有尝试完所有的参数组合，所以不能确定我们得到的局部最小值是否便是**全局最小值**（**global minimum**），选择不同的初始参数组合，可能会找到不同的局部最小值。
 
-![图12_梯度下降算法示意图]()
+![图12_梯度下降算法示意图](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE12_%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
 
 想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。
 
 梯度下降背后数学原理：将反复执行下述公式，直到收敛。
 
-![图13_梯度下降算法]()
+![图13_梯度下降算法](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE13_%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95.png)
 
 其中，*α* 是学习率（**learning rate**），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。
 
-![图14_梯度下降步骤]()
+![图14_梯度下降步骤](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE14_%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%AD%A5%E9%AA%A4.png)
 
 在梯度下降算法中，还有一个更微妙的问题，梯度下降中，我们要更新θ<sub>0</sub>和θ<sub>1</sub>，当 j=0 和 j=1时，会产生更新，所以你将更新J(θ<sub>0</sub>)和J(θ<sub>1</sub>)。实现梯度下降算法的微妙之处是，在这个表达式中，如果你要更新这个等式，你需要同时更新θ<sub>0</sub>和θ<sub>1</sub>，我的意思是在这个等式中，我们要这样更新：
 
@@ -182,13 +182,13 @@ ${\theta_{j}}:={\theta_{j}}-\alpha \frac{\partial }{\partial {\theta_{j}}}J\left
 
 描述：对 θ 赋值，使得 J(θ) 按梯度下降最快方向进行，一直迭代下去，最终得到局部最小值。其中 *α* 是学习率（**learning rate**），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大。
 
-![图15_梯度下降举例]()
+![图15_梯度下降举例](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE15_%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%B8%BE%E4%BE%8B.png)
 
 对于这个问题，求导的目的，基本上可以说取这个红点的切线，就是这样一条红色的直线，刚好与函数相切于这一点，让我们看看这条红色直线的斜率，就是这条刚好与函数曲线相切的这条直线，这条直线的斜率正好是这个三角形的高度除以这个水平长度，现在，这条线有一个正斜率，也就是说它有正导数，因此，我得到的新的θ<sub>1</sub>，θ<sub>1</sub> 更新后等于θ<sub>1</sub> 减去一个正数乘以*α*。
 
 这就是我梯度下降法的更新规则：${\theta_{j}}:={\theta_{j}}-\alpha \frac{\partial }{\partial {\theta_{j}}}J\left( \theta  \right)$
 
-![图16_学习率规则]()
+![图16_学习率规则](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE16_%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A7%84%E5%88%99.png)
 
 让我们来看看如果 *α* 太小或  *α* 太大会出现什么情况：
 
@@ -198,13 +198,13 @@ ${\theta_{j}}:={\theta_{j}}-\alpha \frac{\partial }{\partial {\theta_{j}}}J\left
 
 现在，我还有一个问题，当我第一次学习这个地方时，我花了很长一段时间才理解这个问题，如果我们预先把θ<sub>1</sub> 放在一个局部的最低点，你认为下一步梯度下降法会怎样工作？
 
-![图17_局部最优时]()
+![图17_局部最优时](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE17_%E5%B1%80%E9%83%A8%E6%9C%80%E4%BC%98%E6%97%B6.png)
 
 假设你将 θ<sub>1</sub> 初始化在局部最低点，在这儿，它已经在一个局部的最优处或局部最低点。结果是局部最优点的导数将等于零，因为它是那条切线的斜率。这意味着你已经在局部最优点，它使得θ<sub>1</sub> 不再改变，也就是新的θ<sub>1</sub> 等于原来的θ<sub>1</sub>，因此，如果你的参数已经处于局部最低点，那么梯度下降法更新其实什么都没做，它不会改变参数的值。这也解释了为什么即使学习速率*α*保持不变时，梯度下降也可以收敛到局部最低点。
 
 我们来看一个例子，这是代价函数J(θ)。
 
-![图18_梯度下降]()
+![图18_梯度下降](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE18_%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D.png)
 
 我想找到它的最小值，首先初始化我的梯度下降算法，在那个品红色的点初始化，如果我更新一步梯度下降，也许它会带我到这个点，因为这个点的导数是相当陡的。现在，在这个绿色的点，如果我再更新一步，你会发现我的导数，也即斜率，是没那么陡的。随着我接近最低点，我的导数越来越接近零。所以，梯度下降一步后，新的导数会变小一点点。然后我想再梯度下降一步，在这个绿点，我自然会用一个稍微跟刚才在那个品红点时比，再小一点的一步，到了新的红色点，更接近全局最低点了。因此这点的导数会比在绿点时更小，所以，我再进行一步梯度下降时，我的导数项是更小的，θ<sub>1</sub> 更新的幅度就会更小。所以随着梯度下降法的运行，你移动的幅度会自动变得越来越小，直到最终移动幅度非常小，你会发现，已经收敛到局部极小值。
 
@@ -220,11 +220,11 @@ ${\theta_{j}}:={\theta_{j}}-\alpha \frac{\partial }{\partial {\theta_{j}}}J\left
 
 梯度下降算法和线性回归算法比较如图：
 
-![图19_梯度下降算法和线性回归算法]()
+![图19_梯度下降算法和线性回归算法](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE19_%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E5%92%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95.png)
 
 对我们之前的线性回归问题运用梯度下降法，关键在于求出代价函数的导数，即：
 
-![图20_代价函数的导数]()
+![图20_代价函数的导数](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE20_%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%BC%E6%95%B0.png)
 
 
 $\frac{\partial }{\partial {{\theta }_{j}}}J({{\theta }_{0}},{{\theta }_{1}})=\frac{\partial }{\partial {{\theta }_{j}}}\frac{1}{2m}{{\sum\limits_{i=1}^{m}{\left( {{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}} \right)}}^{2}}$
@@ -235,7 +235,7 @@ $j=1$  时：$\frac{\partial }{\partial {{\theta }_{1}}}J({{\theta }_{0}},{{\the
 
 则算法改写成：
 
-![图21_梯度下降算法]()
+![图21_梯度下降算法](https://github.com/Vuean/Machine_Learning_AndrewNg_Coursera/blob/main/Week1/images/%E5%9B%BE21_%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95.png)
 
 **Repeat {**
 
